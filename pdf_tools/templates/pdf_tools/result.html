@@ -1,0 +1,15 @@
+{% extends 'pdf_tools/base.html' %}
+
+{% block title %}Result - DailyComputerTools{% endblock %}
+
+{% block content %}
+<div class="text-center p-6 bg-white shadow-lg rounded-lg max-w-lg mx-auto">
+  <h1 class="text-2xl font-bold text-green-600 mb-4">✅ Successful!</h1>
+  <p class="mb-6 text-gray-700">Your PDF has been generated successfully. Click the button below to download it.</p>
+  
+  <a href="{% url 'download_file' file_id=file_id %}" 
+     class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-md">
+     ⬇ Download generated PDF
+  </a>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "pdf_tools/base.html" %}
+{% block title %}Dashboard - DailyComputerTools{% endblock %}
+{% block content %}
+
+<div class="max-w-6xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-center text-blue-700 mb-8">
+    Daily Computer Tools
+  </h1>
+
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <!-- Merge PDF -->
+    <a href="{% url 'merge_pdf' %}" 
+       class="bg-white shadow-lg rounded-xl p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16h8M8 12h8m-8-4h8M5 8l-2-2m0 0l2-2m-2 2h16" />
+      </svg>
+      <h2 class="text-lg font-semibold text-gray-800">Merge PDF</h2>
+      <p class="text-sm text-gray-500 text-center mt-1">Combine multiple PDFs into one file.</p>
+    </a>
+
+    <!-- Split PDF -->
+    <a href="{% url 'split_pdf' %}" 
+       class="bg-white shadow-lg rounded-xl p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+      </svg>
+      <h2 class="text-lg font-semibold text-gray-800">Split PDF</h2>
+      <p class="text-sm text-gray-500 text-center mt-1">Extract pages or split PDFs into smaller files.</p>
+    </a>
+
+    <!-- Word to PDF -->
+    <a href="{% url 'word_to_pdf' %}" 
+       class="bg-white shadow-lg rounded-xl p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-purple-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20h9" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m0 0H3m9-16h9" />
+      </svg>
+      <h2 class="text-lg font-semibold text-gray-800">Word to PDF</h2>
+      <p class="text-sm text-gray-500 text-center mt-1">Convert your Word documents into PDF format.</p>
+    </a>
+
+    <!-- PDF to Image -->
+    <a href="{% url 'pdf_to_image' %}" 
+       class="bg-white shadow-lg rounded-xl p-6 flex flex-col items-center hover:shadow-2xl transition">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" />
+      </svg>
+      <h2 class="text-lg font-semibold text-gray-800">PDF to Image</h2>
+      <p class="text-sm text-gray-500 text-center mt-1">Convert PDF pages into high-quality images.</p>
+    </a>
+  </div>
+</div>
+
+{% endblock %}

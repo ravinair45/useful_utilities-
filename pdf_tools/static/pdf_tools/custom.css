@@ -1,0 +1,84 @@
+/* custom.css */
+
+/* Full page background */
+body {
+  @apply bg-gradient-to-r from-blue-50 via-white to-blue-100 min-h-screen;
+}
+
+/* Navbar / Header */
+nav {
+  background: rgba(17, 148, 190, 0.9); /* light blue with transparency */
+  backdrop-filter: blur(20px);            /* adds a glassy blur effect */
+  -webkit-backdrop-filter: blur(6px);    /* for Safari */
+  color: #1e3a8a; /* dark blue text */
+}
+
+/* Fancy H1 heading */
+h1 {
+  color: #1f2937;
+  font-size: 2.3rem;
+  font-weight: 800;
+  position: relative;
+  display: inline-block;
+}
+
+h1::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 60%;
+  height: 6px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  border-radius: 4px;
+}
+/* Tool cards hover effect */
+a {
+  transition: transform 0.2s ease-in-out;
+}
+a:hover {
+  transform: scale(1.05);
+}
+
+/* Custom titles */
+h1, h2 {
+  @apply text-gray-800;
+}
+
+/* Footer (if you add one later) */
+footer {
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+  margin-top: 2rem;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+}
+
+/* Footer links (optional) */
+footer a {
+  color: #e0f2fe; /* light blue */
+  margin: 0 0.5rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  footer {
+    font-size: 0.85rem;
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  footer {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+}
