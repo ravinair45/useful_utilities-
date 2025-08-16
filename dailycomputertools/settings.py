@@ -29,7 +29,12 @@ SECRET_KEY = 'django-insecure-yd3p^v+(*3mqkv)1#&d=4c(p)1u_b)k2(s(ca&*51_#qg&q5_p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['daily-computer-tools.onrender.com', '127.0.0.1', 'dailycomputertools.org', 'www.dailycomputertools.org']
+CSRF_TRUSTED_ORIGINS = [
+    "https://daily-computer-tools.onrender.com",
+    'https://dailycomputertools.org',
+    'https://www.dailycomputertools.org',
+]
 
 
 # Application definition
