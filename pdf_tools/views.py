@@ -120,58 +120,6 @@ def split_pdf(request):
 
     return render(request, "pdf_tools/split_pdf.html")
 
-def word_to_pdf(request):
-    if request.method == "POST":
-        word_file = request.FILES.get("word_file")
-
-        if not word_file:
-            return HttpResponse("Please upload a Word (.docx) file.")
-
-        try:
-            # Detect LibreOffice executable
-            libreoffice_path = find_libreoffice_executable()
-
-            # Save uploaded file temporarily
-            temp_word_path = default_storage.save(word_file.name, word_file)
-            abs_word_path = os.path.join(settings.MEDIA_ROOT, temp_word_path)
-
-            # Output folder for PDF
-            output_dir = settings.MEDIA_ROOT
-
-            # Run LibreOffice in headless mode to convert
-            subprocess.run([
-                libreoffice_path,
-                "--headless",
-                "--convert-to", "pdf",
-                "--outdir", output_dir,
-                abs_word_path
-            ], check=True)
-
-            # Find converted PDF path
-            pdf_filename = os.path.splitext(word_file.name)[0] + ".pdf"
-            abs_pdf_path = os.path.join(output_dir, pdf_filename)
-
-            # Read PDF into memory and delete temp files
-            with open(abs_pdf_path, "rb") as f:
-                pdf_content = f.read()
-
-            os.remove(abs_word_path)
-            os.remove(abs_pdf_path)
-
-            # Return PDF as download
-            response = HttpResponse(pdf_content, content_type="application/pdf")
-            response["Content-Disposition"] = f'attachment; filename="{pdf_filename}"'
-            return response
-
-        except FileNotFoundError as e:
-            return HttpResponse(str(e))
-        except subprocess.CalledProcessError as e:
-            return HttpResponse(f"Error converting file: {e}")
-        except Exception as e:
-            return HttpResponse(f"Unexpected error: {e}")
-
-    return render(request, "pdf_tools/word_to_pdf.html")
-
 def pdf_to_image(request):
     if request.method == "POST":
         pdf_file = request.FILES.get("pdf_file")
