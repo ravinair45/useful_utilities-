@@ -1,10 +1,15 @@
 {% extends "pdf_tools/base.html" %}
-
-{% block title %}Merge PDF Tool | PDF Tools{% endblock %}
-
-{% block meta_description %}Merge multiple PDF files into one easily and securely online using our PDF tools.{% endblock %}
-
-{% block meta_keywords %}merge pdf, combine pdf, pdf merge tool, pdf tools{% endblock %}
+{% load static %}
+{% block meta_title %}Merge PDF files online. Free service to merge PDF{% endblock %}
+{% block meta_description %}Select multiple PDF files and merge them in seconds. Merge & combine PDF files online, easily and free.{% endblock %}
+{% block meta_keywords %}Merge PDF, Combine PDF, Free PDF Tools, Online PDF Merger{% endblock %}
+{% block canonical_url %}https://www.dailycomputertools.org/pdf_tools/merge_pdf{% endblock %}
+{% block og_title %}Merge PDF files online. Free service to merge PDF{% endblock %}
+{% block og_description %}Select multiple PDF files and merge them in seconds. Merge & combine PDF files online, easily and free.{% endblock %}
+{% block og_image %}{% static 'pdf_tools/og/merge.png' %}{% endblock %}
+{% block twitter_title %}Merge PDF files online. Free service to merge PDF{% endblock %}
+{% block twitter_description %}Select multiple PDF files and merge them in seconds. Merge & combine PDF files online, easily and free.{% endblock %}
+{% block twitter_image %}{% static 'pdf_tools/og/merge.png' %}{% endblock %}
 
 {% block content %}
 <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-8">

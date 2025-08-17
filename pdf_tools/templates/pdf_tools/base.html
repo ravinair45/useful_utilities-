@@ -13,7 +13,24 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}DailyComputerTools{% endblock %}</title>
+  <title>{% block meta_title %}DailyComputerTools - Free PDF Tools{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Free online tools to merge, split, convert, and compress PDF files easily.{% endblock %}">
+  <meta name="keywords" content="{% block meta_keywords %}Merge PDF, Split PDF, Convert PDF, Compress PDF, Word to PDF, PDF to Image{% endblock %}">
+  <link rel="canonical" href="{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}">
+
+  <!-- Open Graph (Facebook/LinkedIn) -->
+  <meta property="og:site_name" content="DailyComputerTools - Free PDF Tools"/>
+  <meta property="og:title" content="{% block og_title %}DailyComputerTools - Free PDF Tools{% endblock %}"/>
+  <meta property="og:description" content="{% block og_description %}Free online tools to merge, split, convert, and compress PDF files easily.{% endblock %}"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}">
+  <meta property="og:image" content="{% block og_image %}{% static 'pdf_tools/social-default.png' %}{% endblock %}"/>
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% block twitter_title %}DailyComputerTools - Free PDF Tools{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}Free online tools to merge, split, convert, and compress PDF files easily.{% endblock %}">
+  <meta name="twitter:image" content="{% block twitter_image %}{% static 'pdf_tools/social-default.png' %}{% endblock %}">
   <link rel="icon" href="{% static 'pdf_tools/favicon.png' %}" type="image/png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'pdf_tools/custom.css' %}">
