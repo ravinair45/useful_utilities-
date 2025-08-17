@@ -13,7 +13,7 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block meta_title %}DailyComputerTools - Free PDF Tools{% endblock %}</title>
+  <title>{% block meta_title %}Daily Computer Tools - Free PDF Tools{% endblock %}</title>
   <meta name="description" content="{% block meta_description %}Free online tools to merge, split, convert, and compress PDF files easily.{% endblock %}">
   <meta name="keywords" content="{% block meta_keywords %}Merge PDF, Split PDF, Convert PDF, Compress PDF, Word to PDF, PDF to Image{% endblock %}">
   <link rel="canonical" href="{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}">
@@ -31,7 +31,7 @@
   <meta name="twitter:title" content="{% block twitter_title %}DailyComputerTools - Free PDF Tools{% endblock %}">
   <meta name="twitter:description" content="{% block twitter_description %}Free online tools to merge, split, convert, and compress PDF files easily.{% endblock %}">
   <meta name="twitter:image" content="{% block twitter_image %}{% static 'pdf_tools/social-default.png' %}{% endblock %}">
-  <link rel="icon" href="{% static 'pdf_tools/favicon.png' %}" type="image/png">
+  <link rel="icon" href="{% static 'pdf_tools/favicon.ico' %}" type="image/x-icon">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'pdf_tools/custom.css' %}">
 </head>
@@ -66,8 +66,9 @@
                     peer-checked:max-h-96 peer-checked:opacity-100">
           <div class="flex flex-col space-y-2 p-3">
             <a href="/" class="text-white hover:text-gray-200">Home</a>
-            <a href="/pdf_tools/merge_pdf" class="text-white hover:text-gray-200">Merge</a>
-            <a href="/pdf_tools/split_pdf" class="text-white hover:text-gray-200">Split</a>
+            <a href="/pdf_tools/merge_pdf" class="text-white hover:text-gray-200">Merge PDF</a>
+            <a href="/pdf_tools/split_pdf" class="text-white hover:text-gray-200">Split PDF</a>
+            <a href="/pdf_tools/compress_pdf" class="text-white hover:text-gray-200">Compress PDF</a>
             <a href="/pdf_tools/pdf_to_image" class="text-white hover:text-gray-200">PDF→Image</a>
           </div>
         </div>
@@ -78,6 +79,7 @@
         <a href="/" class="text-white hover:text-gray-200">Home</a>
         <a href="/pdf_tools/merge_pdf" class="text-white hover:text-gray-200">Merge PDF</a>
         <a href="/pdf_tools/split_pdf" class="text-white hover:text-gray-200">Split PDF</a>
+        <a href="/pdf_tools/compress_pdf" class="text-white hover:text-gray-200">Compress PDF</a>
         <a href="/pdf_tools/pdf_to_image" class="text-white hover:text-gray-200">PDF→Image</a>
       </div>
     </div>

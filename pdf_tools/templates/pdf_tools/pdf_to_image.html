@@ -1,9 +1,9 @@
 {% extends "pdf_tools/base.html" %}
 {% load static %}
-{% block meta_title %}Convert PDF to JPG Online - Free PDF to Image Converter{% endblock %}
+{% block meta_title %}Convert PDF to JPG Online - Free PDF to Image Converter | Daily Computer Tools{% endblock %}
 {% block meta_description %}Easily convert PDF pages to JPG or extract images from a PDF. Free online PDF to JPG converter, fast and secure - no installation required.{% endblock %}
 {% block meta_keywords %}PDF to JPG, Convert PDF to Image, Extract Images from PDF, Free PDF Converter, Online PDF Tools, JPG from PDF, Merge PDF, Split PDF, Compress PDF, Word to PDF{% endblock %}
-{% block canonical_url %}https://www.dailycomputertools.org/pdf_tools/pdf_to_image{% endblock %}
+{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}
 {% block og_title %}Convert PDF to JPG Online - Free PDF to Image Converter{% endblock %}
 {% block og_description %}Easily convert PDF pages to JPG or extract images from a PDF. Free online PDF to JPG converter, fast and secure.{% endblock %}
 {% block og_image %}{% static 'pdf_tools/og/pdf_to_image.png' %}{% endblock %}

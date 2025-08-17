@@ -1,5 +1,4 @@
-import os
-import subprocess
+import os, uuid
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, FileResponse
 from PyPDF2 import PdfReader, PdfWriter, PdfMerger
@@ -9,11 +8,12 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from django.conf import settings
 from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 import platform
 import shutil
 import fitz 
 from zipfile import ZipFile
-import uuid
+from PIL import Image
 
 def dashboard(request):
     return render(request, "pdf_tools/dashboard.html")
@@ -166,3 +166,57 @@ def download_file(request, file_id):
         return FileResponse(open(file_path, 'rb'), as_attachment=True, filename="merged.pdf")
     else:
         return render(request, 'pdf_tools/result.html', {"error": "File not found."})
+
+def compress_pdf(request):
+    if request.method == "POST":
+        pdf_file = request.FILES.get("pdf_file")
+        compression_level = request.POST.get("compression_level")  # 'basic' or 'strong'
+
+        if not pdf_file:
+            return HttpResponse("Please upload a PDF file.")
+
+        try:
+            pdf_doc = fitz.open(stream=pdf_file.read(), filetype="pdf")
+
+            output_pdf = fitz.open()
+
+            for page_num in range(pdf_doc.page_count):
+                page = pdf_doc[page_num]
+
+                # Scale factor changes based on compression level
+                if compression_level == "basic":
+                    zoom = 1.0  # keep same resolution
+                    quality = 75
+                else:  # strong compression
+                    zoom = 0.5  # reduce resolution by half
+                    quality = 40
+
+                pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom))
+
+                # Convert pixmap to Pillow Image
+                img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+
+                # Save compressed image to memory
+                img_bytes_io = BytesIO()
+                img.save(img_bytes_io, format="JPEG", quality=quality, optimize=True)
+                img_bytes = img_bytes_io.getvalue()
+
+                # Insert compressed image back into PDF
+                rect = fitz.Rect(0, 0, pix.width, pix.height)
+                new_page = output_pdf.new_page(width=rect.width, height=rect.height)
+                new_page.insert_image(rect, stream=img_bytes)
+
+            # Save compressed PDF
+            file_id = f"{uuid.uuid4()}_compressed.pdf"
+            output_path = os.path.join("media", file_id)
+            output_pdf.save(output_path, deflate=True)
+
+            pdf_doc.close()
+            output_pdf.close()
+
+            return redirect("result", file_id=file_id)
+
+        except Exception as e:
+            return HttpResponse(f"Error compressing PDF: {e}")
+
+    return render(request, "pdf_tools/compress_pdf.html")

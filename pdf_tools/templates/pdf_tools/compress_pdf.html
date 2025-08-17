@@ -1,0 +1,41 @@
+{% extends "pdf_tools/base.html" %}
+{% load static %}
+{% block meta_title %}Compress PDF online. Same PDF quality less file size | Daily Computer Tools{% endblock %}
+{% block meta_description %}Compress PDF file to get the same PDF quality but less filesize. Compress or optimize PDF files online, easily and free.{% endblock %}
+{% block meta_keywords %}Compress PDF, Optimize PDF, Reduce PDF Size, Shrink PDF, Free PDF Tools, Online PDF Compressor, Merge PDF, Split PDF, Combine PDF, Convert PDF, Word to PDF, Excel to PDF, PowerPoint to PDF, PDF to JPG, JPG to PDF{% endblock %}
+{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block og_title %}Compress PDF online. Same PDF quality less file size{% endblock %}
+{% block og_description %}Compress PDF file to get the same PDF quality but less filesize. Compress or optimize PDF files online, easily and free.{% endblock %}
+{% block og_image %}{% static 'pdf_tools/og/compress.png' %}{% endblock %}
+{% block twitter_title %}Compress PDF online. Same PDF quality less file size{% endblock %}
+{% block twitter_description %}Compress PDF file to get the same PDF quality but less filesize. Compress or optimize PDF files online, easily and free.{% endblock %}
+{% block twitter_image %}{% static 'pdf_tools/og/compress.png' %}{% endblock %}
+
+{% block content %}
+  <div class="max-w-lg mx-auto bg-white p-6 rounded-2xl shadow-lg">
+    <h1 class="text-3xl font-bold text-center text-blue-700 mb-8">
+      Compress PDF
+    </h1>
+    <form method="post" enctype="multipart/form-data" class="space-y-4">
+      {% csrf_token %}
+      <input type="file" name="pdf_file" accept="application/pdf"
+             class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-400">
+
+      <div class="flex justify-between items-center mt-4">
+        <label class="flex items-center space-x-2">
+          <input type="radio" name="compression_level" value="basic" checked>
+          <span>Basic (Good Quality)</span>
+        </label>
+        <label class="flex items-center space-x-2">
+          <input type="radio" name="compression_level" value="strong">
+          <span>Strong (Smaller Size)</span>
+        </label>
+      </div>
+
+      <button type="submit"
+              class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+        Upload & Compress
+      </button>
+    </form>
+  </div>
+{% endblock %}
