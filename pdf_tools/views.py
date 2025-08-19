@@ -14,6 +14,7 @@ import shutil
 import fitz 
 from zipfile import ZipFile
 from PIL import Image
+import yt_dlp
 
 def dashboard(request):
     return render(request, "pdf_tools/dashboard.html")
@@ -163,7 +164,11 @@ def result(request, file_id):
 def download_file(request, file_id):
     file_path = os.path.join(settings.MEDIA_ROOT, file_id)
     if os.path.exists(file_path):
-        return FileResponse(open(file_path, 'rb'), as_attachment=True, filename="merged.pdf")
+        return FileResponse(
+            open(file_path, 'rb'),
+            as_attachment=True,
+            filename=file_id  # preserve original filename (UUID + ext)
+        )
     else:
         return render(request, 'pdf_tools/result.html', {"error": "File not found."})
 
@@ -220,3 +225,57 @@ def compress_pdf(request):
             return HttpResponse(f"Error compressing PDF: {e}")
 
     return render(request, "pdf_tools/compress_pdf.html")
+
+def youtube_download(request):
+    if request.method == "POST":
+        url = request.POST.get("url")
+        format_choice = request.POST.get("format", "mp4")  # default: mp4
+        if not url:
+            return HttpResponse("Please provide a valid YouTube URL.")
+
+        # Ensure MEDIA_ROOT/youtube exists
+        download_path = os.path.join(settings.MEDIA_ROOT, "youtube")
+        os.makedirs(download_path, exist_ok=True)
+
+        try:
+            # Unique filename ID
+            file_id = str(uuid.uuid4())
+
+            # Set correct output template
+            if format_choice == "mp3":
+                outtmpl = os.path.join(download_path, f"{file_id}.%(ext)s")
+                ydl_opts = {
+                    "outtmpl": outtmpl,
+                    "format": "bestaudio/best",
+                    "postprocessors": [{
+                        "key": "FFmpegExtractAudio",
+                        "preferredcodec": "mp3",
+                        "preferredquality": "192",
+                    }],
+                }
+            else:  # mp4 video
+                outtmpl = os.path.join(download_path, f"{file_id}.%(ext)s")
+                ydl_opts = {
+                    "outtmpl": outtmpl,
+                    "format": "mp4/best",
+                }
+
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                info = ydl.extract_info(url, download=True)
+                filename = ydl.prepare_filename(info)
+
+            # Detect actual extension (yt-dlp decides)
+            _, ext = os.path.splitext(filename)
+            final_file_id = file_id + ext
+
+            # Rename to consistent file_id.ext inside MEDIA_ROOT
+            final_path = os.path.join(settings.MEDIA_ROOT, final_file_id)
+            os.rename(filename, final_path)
+
+            # Redirect to existing result view
+            return redirect("result", file_id=final_file_id)
+
+        except Exception as e:
+            return HttpResponse(f"Error: {str(e)}")
+
+    return render(request, "pdf_tools/youtube_download.html")

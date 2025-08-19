@@ -28,4 +28,5 @@ urlpatterns = [
     path('result/<str:file_id>/', views.result, name='result'),
     path('download/<str:file_id>/', views.download_file, name='download_file'),
     path("pdf_tools/compress_pdf", views.compress_pdf, name="compress_pdf"), 
+    path("youtube/download_videos", views.youtube_download, name="youtube_download"),
 ]

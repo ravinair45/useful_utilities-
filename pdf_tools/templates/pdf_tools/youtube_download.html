@@ -1,0 +1,34 @@
+{% extends "pdf_tools/base.html" %}
+{% load static %}
+{% block meta_title %}Download YouTube Videos & Audio Online | Daily Computer Tools{% endblock %}
+{% block meta_description %}Download YouTube videos or extract audio online for free. Save videos as MP4 or audio as MP3 quickly and easily.{% endblock %}
+{% block meta_keywords %}Download YouTube, YouTube Video Downloader, YouTube MP4, YouTube MP3, Free YouTube Download, Online Video Downloader, Video to MP3, YouTube Shorts Download{% endblock %}
+{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block og_title %}Download YouTube Videos & Audio Online{% endblock %}
+{% block og_description %}Download YouTube videos or extract audio online for free. Save videos as MP4 or audio as MP3 quickly and easily.{% endblock %}
+{% block og_image %}{% static 'pdf_tools/og/youtube.png' %}{% endblock %}
+{% block twitter_title %}Download YouTube Videos & Audio Online{% endblock %}
+{% block twitter_description %}Download YouTube videos or extract audio online for free. Save videos as MP4 or audio as MP3 quickly and easily.{% endblock %}
+{% block twitter_image %}{% static 'pdf_tools/og/youtube.png' %}{% endblock %}
+
+
+{% block content %}
+<div class="max-w-xl mx-auto mt-10 p-6 bg-white shadow rounded">
+  <h2 class="text-2xl font-bold mb-4 text-blue-600">Download YouTube Video</h2>
+  
+  <form method="post">
+    {% csrf_token %}
+    <input type="text" name="url" placeholder="Enter YouTube URL"
+           class="w-full p-2 border rounded mb-4" required>
+               <!-- Format selection -->
+    <!-- <label class="block mb-2 font-semibold text-gray-700">Select Format:</label>
+    <select name="format" class="w-full p-2 border rounded mb-4">
+      <option value="mp4">Video (MP4)</option>
+      <option value="mp3">Audio (MP3)</option>
+    </select> -->
+    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+      Download
+    </button>
+  </form>
+</div>
+{% endblock %}
